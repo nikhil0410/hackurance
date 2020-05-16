@@ -1,41 +1,40 @@
-<!--{% extends "base.html" %} {% block content %}-->
+{% extends "base.html" %}
 
-<!--<div class="col-md-6 offset-md-3">-->
-<!--    <h1 class="text-center">Login</h1>-->
-<!--    <form method="POST">-->
-<!--        {% csrf_token %}-->
-<!--        <div class="form-group">-->
-<!--            <input type="text" class="form-control" placeholder="Enter Registeration Id" name="username">-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <input type="password" class="form-control" placeholder=" Enter Password" name="password">-->
-<!--        </div>-->
-<!--        <button type="submit" class="btn btn-primary">Login</button>-->
-<!--    </form>-->
-<!--</div>-->
+{% block content %}
 
-<form action="action_page.php" method="post">
-  <div class="col-md-6 offset-md-3">
-    <!--<img src="img_avatar2.png" alt="Avatar" class="avatar">-->
-  </div>
-
-  <div class="container">
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
-
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
-
-    <button type="submit">Login</button>
-    <label>
-      <input type="checkbox" checked="checked" name="remember"> Remember me
-    </label>
-  </div>
-
-  <div class="container" style="background-color:#f1f1f1">
-    <button type="button" class="cancelbtn">Cancel</button>
-    <span class="psw">Forgot <a href="#">password?</a></span>
-  </div>
-</form>
-
-{% endblock %}
+{% load static from staticfiles %}
+    <div class="clear"></div>
+    <div id="page-content">
+        <section class="breadcrumb">
+            <div class="container">
+                <h2>Login</h2>
+                <ul>
+                    <li><a href="index.html">Home</a> ></li>
+                    <li><a href="#">Login</a></li>
+                </ul>
+            </div>
+        </section>
+        <section class="contact-us">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="form-box">
+                            <h2>Login to proceed</h2>
+                            <div class="form-content">
+                              <form method="POST" action="">
+                                {% csrf_token %}
+                                  <input type="text" name="username" placeholder="Email" />
+                                  <input type="password" name="password" placeholder="Password" />
+                                  <div class="text-center">
+                                      <input type="submit" class="btn-default" value="Submit" />
+                                  </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="clear"></div>
+    {% endblock  %}
