@@ -244,7 +244,7 @@ def contact_us(request):
     return render(request, 'contact-us.html', {})
 
 
-def login_user(request):
+def login(request):
 
     if request.method == 'POST':
         username = request.POST['username']
