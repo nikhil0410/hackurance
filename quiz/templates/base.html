@@ -34,7 +34,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 address">
-                        <i class="ti-location-pin"></i> 2109 WS 09 Oxford Rd #127 ParkVilla Hills, MI 48334
+                        <i class="ti-location-pin"></i> Tower no. 1 Candor IT/ITES SEZ Village, Tikri, Sector 48, Gurugram, Haryana 122022
                     </div>
                     <div class="col-sm-6 social">
                         <ul>
@@ -66,11 +66,11 @@
                             <a href="{% url 'index' %}">Home</a>
                         </li>
                         <li>
-                            <a href="blog.html">Blog</a>
+                            <a href="blog.html">Products</a>
                         </li>
-                        <li>
-                            <a href="blog-details.html">Blog Details</a>
-                        </li>
+                        <!-- <li>
+                            <a href="blog-details.html">PRODUCTS</a>
+                        </li> -->
                         <li>
                             <a href="{% url 'contact-us' %}">Contact</a>
                         </li>
@@ -82,8 +82,14 @@
                             <a href="{% url 'claim' %}">Claim</a>
                         </li>
                         <li>
-                            <a href="{% url 'logout' %}" class="btn-default">Logout</a>
+                            <a href="{% url 'claim' %}">My Account</a>
                         </li>
+                        <li>
+                            <a href="{% url 'logout' %}">Logout</a>
+                        </li>
+                        <!-- <li>
+                            <a href="{% url 'logout' %}" class="btn-default">Logout</a>
+                        </li> -->
                         {% else %}
                         <li>
                             <a href="{% url 'login' %}">Login</a>
@@ -101,11 +107,11 @@
     {% block content %}
     {% endblock %}
 
-    <footer>
+     <footer>
         <div class="container">
             <div class="row contact-sec">
                 <div class="col-md-5 col-lg-5">
-                    <h2>Insurance<span>Press</span></h2>
+                    <h2>Find a Guardian benefits sales office<span></span></h2>
                     <div class="row">
                         <div class="col-sm-6">
                             <p>E104 Dharti -2 , Nr Silverstar Mall Chandlodia - Ahmedabad
@@ -113,7 +119,7 @@
                         </div>
                         <div class="col-sm-6">
                             <ul>
-                                <li><a href="#"><i class="fa fa-phone"></i> +91 123 456 7890</a></li>
+                                <li><a href="#"><i class="fa fa-phone"></i> +XXX XXX XXXX</a></li>
                                 <li><a href="#"><i class="ti-email"></i> info@bootstrapmart.com</a></li>
                             </ul>
                         </div>
@@ -121,7 +127,7 @@
                     <a href="#" class="btn-default">Contact Us</a>
                 </div>
                 <div class="col-md-5 col-lg-5 col-md-offset-2 col-lg-offset-2">
-                    <h2>Agent<span>Detail</span></h2>
+                    <h2>Broker quote request<span></span></h2>
                     <div class="row">
                         <div class="col-sm-6">
                             <p>E104 Dharti -2 , Nr Silverstar Mall Chandlodia - Ahmedabad
@@ -129,7 +135,7 @@
                         </div>
                         <div class="col-sm-6">
                             <ul>
-                                <li><a href="#"><i class="fa fa-phone"></i> +91 123 456 7890</a></li>
+                                <li><a href="#"><i class="fa fa-phone"></i> +XXX XXX XXXX</a></li>
                                 <li><a href="#"><i class="ti-email"></i> info@bootstrapmart.com</a></li>
                             </ul>
                         </div>
