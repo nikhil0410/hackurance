@@ -20,14 +20,19 @@
                     <div class="col-md-8 col-md-offset-2">
                         <div class="form-box">
                             <h2>Get in Touch</h2>
+
                             <div class="form-content">
-                                <input type="text" name="name" placeholder="Your Name" />
-                                <input type="text" name="email" placeholder="Email" />
-                                <input type="text" name="subject" placeholder="Subject" />
-                                <textarea rows="1" cols="1" name="message" placeholder="Message"></textarea>
+                            <form method="POST" action="">
+                                {% csrf_token %}
+                                {{ form.name }}
+                                {{ form.email }}
+                                {{ form.subject }}
+                                {{ form.message }}
+
                                 <div class="text-center">
                                     <input type="submit" class="btn-default" value="Submit" />
                                 </div>
+                            </form>
                             </div>
                         </div>
                         <div class="contact-info">

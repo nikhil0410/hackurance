@@ -6,7 +6,8 @@ from django.shortcuts import get_object_or_404, render
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import FormView
-from .forms import QuestionForm, RegisterForm
+from .forms import ContactForm, RegisterForm, EnrollmentForm, ClaimForm
+from django.http import HttpResponse,HttpResponseRedirect
 # from .models import Quiz, Category, Progress, Sitting, Question
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
@@ -19,7 +20,71 @@ def index(request):
     return render(request, 'index.html', {})
     
 def contact_us(request):
-    return render(request, 'contact-us.html', {})
+    # if this is a POST request we need to process the form data
+    template = 'contact-us.html'
+   
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = ContactForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            contact = form.save(commit=False)
+            contact.save()
+               
+            # redirect to accounts page:
+            return render(request, 'index.html', {})
+
+   # No post data availabe, let's just show the page.
+    else:
+        form = ContactForm()
+
+    return render(request, template, {'form': form})
+
+def enrollment(request):
+    # if this is a POST request we need to process the form data
+    template = 'enrollment.html'
+   
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = EnrollmentForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            print(form)
+            contact = form.save(commit=False)
+            contact.user = request.user
+            contact.save()
+               
+            # redirect to accounts page:
+            return render(request, 'index.html', {})
+
+   # No post data availabe, let's just show the page.
+    else:
+        form = EnrollmentForm()
+
+    return render(request, template, {'form': form})
+
+def claim(request):
+    # if this is a POST request we need to process the form data
+    template = 'claim.html'
+   
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = ClaimForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            print(form)
+            contact = form.save(commit=False)
+            contact.user = request.user
+            contact.save()
+               
+            # redirect to accounts page:
+            return HttpResponseRedirect('/')
+
+   # No post data availabe, let's just show the page.
+    else:
+        form = ClaimForm()
+
+    return render(request, template, {'form': form})
 
 
 def login_user(request):
@@ -94,4 +159,5 @@ def logout_user(request):
     messages.success(request, 'You have been logged out!')
     print('logout function working')
     return render(request, 'index.html', {})
+
 

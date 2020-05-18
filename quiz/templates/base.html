@@ -55,7 +55,7 @@
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                         <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="{% url 'index' %}">
                         Guardian<span>Life</span>
                     </a>
                     <p>Call Us Now <b>+215 (362) 4579</b></p>
@@ -74,15 +74,22 @@
                         <li>
                             <a href="{% url 'contact-us' %}">Contact</a>
                         </li>
+                        {% if request.user.is_authenticated %}
+                        <li>
+                            <a href="{% url 'enrollment' %}">Enrollment Form</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'claim' %}">Claim</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'logout' %}" class="btn-default">Logout</a>
+                        </li>
+                        {% else %}
                         <li>
                             <a href="{% url 'login' %}">Login</a>
                         </li>
                         <li>
                             <a href="{% url 'register' %}">Register</a>
-                        </li>
-                        {% if request.user.is_authenticated %}
-                        <li>
-                            <a href="{% url 'logout' %}" class="btn-default">Logout</a>
                         </li>
                         {% endif %}
                     </ul>

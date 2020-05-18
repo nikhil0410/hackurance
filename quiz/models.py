@@ -16,6 +16,8 @@ from django.contrib.auth.models import User
 import mcq
 from django.db.models import Q
 
+User = settings.AUTH_USER_MODEL
+
 
 # class CSVUpload(models.Model):
 #     title       = models.CharField(max_length=100, verbose_name=_('Title'), blank=False)
@@ -83,6 +85,41 @@ def csv_upload_post_save(sender, instance, created, *args, **kwargs):
         ''' 
         instance.completed = True
         instance.save()
+
+class ContactModel(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=100)
+    subject = models.CharField(max_length=100)
+    message = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+class EnrollmentModel(models.Model):
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=None)
+    employer_name = models.CharField(max_length=100, null=True)
+    group_plan_number = models.CharField(max_length=10, null=True)
+    ssn = models.CharField(max_length=10, null=True)
+    age = models.IntegerField()
+    gender = models.CharField(max_length=10, default='Male')
+    date_of_birth = models.CharField(max_length=10, null=True)
+    address = models.CharField(max_length=10, null=True)
+    work_status = models.CharField(max_length=10, null=True)
+    annual_income = models.IntegerField(null=True)
+    profession = models.CharField(max_length=100, null=True)
+    dependent_details = models.CharField(max_length=10, null=True)
+          
+    def __str__(self):
+        return self.profession 
+
+class ClaimModel(models.Model):
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=None)
+    group_id = models.CharField(max_length=10, null=True)
+    ssn = models.CharField(max_length=10, null=True)
+    claim_number = models.CharField(max_length=10, null=True)
+          
+    def __str__(self):
+        return self.group_id
 
 
 # post_save.connect(csv_upload_post_save, sender=CSVUpload)

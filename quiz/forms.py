@@ -1,14 +1,48 @@
 from django import forms
 from django.forms.widgets import RadioSelect
+from .models import ContactModel, EnrollmentModel, ClaimModel
 
 
-class QuestionForm(forms.Form):
-    def __init__(self, question, *args, **kwargs):
-        super(QuestionForm, self).__init__(*args, **kwargs)
-        # print(question.get_answers_list())
-        choice_list = [x for x in question.get_answers_list()]
-        print(choice_list)
-        self.fields["answers"] = forms.ChoiceField(choices=choice_list, widget=RadioSelect)
+class ContactForm(forms.ModelForm):
+
+    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Your Name'}))
+    email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder':'Email'}))
+    subject = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Subject'}))
+    message = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Last Name'}))
+    class Meta:
+        model = ContactModel
+        fields = ['name', 'email','subject', 'message']
+
+
+class EnrollmentForm(forms.ModelForm):
+
+    employer_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Employer Name'}))
+    group_plan_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Group Plan Number'}))
+
+    ssn = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'SSN'}))
+    age = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Your Age'}))
+    gender = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Gender'}))
+    date_of_birth = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Date Of Birth'}))
+    address = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Address'}))
+    work_status = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Work Status'}))
+    annual_income = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Annual Income'}))
+    profession = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Job Title'}))
+    dependent_details = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Dependent Details'}))
+
+    class Meta:
+        model = EnrollmentModel
+        fields = ['employer_name', 'group_plan_number', 'ssn', 'age', 'gender', 'date_of_birth', 'address', 'work_status', 
+        'annual_income', 'profession', 'dependent_details']
+
+class ClaimForm(forms.ModelForm):
+
+    group_id = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Group ID'}))
+    ssn = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Social Security Number'}))
+    claim_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Claim Number'}))
+    # profession = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Profession'}))
+    class Meta:
+        model = ClaimModel
+        fields = ['group_id', 'ssn','claim_number']
 
 
 class RegisterForm(forms.Form):
