@@ -1,12 +1,14 @@
 import random
 
+from django.contrib import messages
+
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, render
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import FormView
-from .forms import ContactForm, RegisterForm, EnrollmentForm, ClaimForm
+from .forms import ContactForm, RegisterForm, EnrollmentForm, ClaimForm, GetFreeQuoteForm
 from django.http import HttpResponse,HttpResponseRedirect
 # from .models import Quiz, Category, Progress, Sitting, Question
 from django.shortcuts import render, redirect
@@ -17,7 +19,25 @@ from django.contrib.auth.models import User
 
 
 def index(request):
-    return render(request, 'index.html', {})
+    template = 'index.html'
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = GetFreeQuoteForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            contact = form.save(commit=False)
+            contact.save()
+
+            messages.success(request, 'Form submission successful')
+               
+            # redirect to accounts page:
+            return render(request, 'index.html', {})
+
+   # No post data availabe, let's just show the page.
+    else:
+        form = GetFreeQuoteForm()
+
+    return render(request, template, {'form': form})
     
 def contact_us(request):
     # if this is a POST request we need to process the form data
@@ -37,6 +57,27 @@ def contact_us(request):
    # No post data availabe, let's just show the page.
     else:
         form = ContactForm()
+
+    return render(request, template, {'form': form})
+
+def get_free_quote(request):
+    # if this is a POST request we need to process the form data
+    template = 'index.html'
+   
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = GetFreeQuoteForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            contact = form.save(commit=False)
+            contact.save()
+               
+            # redirect to accounts page:
+            return render(request, 'index.html', {})
+
+   # No post data availabe, let's just show the page.
+    else:
+        form = GetFreeQuoteForm()
 
     return render(request, template, {'form': form})
 

@@ -1,6 +1,6 @@
 from django import forms
 from django.forms.widgets import RadioSelect
-from .models import ContactModel, EnrollmentModel, ClaimModel
+from .models import ContactModel, EnrollmentModel, ClaimModel, GetFreeQuote
 
 
 class ContactForm(forms.ModelForm):
@@ -31,7 +31,7 @@ class EnrollmentForm(forms.ModelForm):
 
     class Meta:
         model = EnrollmentModel
-        fields = ['employer_name', 'group_plan_number', 'ssn', 'age', 'gender', 'date_of_birth', 'address', 'work_status', 
+        fields = ['employer_name', 'group_plan_number', 'ssn', 'age', 'gender', 'date_of_birth', 'address', 'work_status',
         'annual_income', 'profession', 'dependent_details']
 
 class ClaimForm(forms.ModelForm):
@@ -53,3 +53,34 @@ class RegisterForm(forms.Form):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'First Name'}))
     last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Last Name'}))
     phone_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Phone Number'}), required=False)
+
+class GetFreeQuoteForm(forms.ModelForm):
+    CHOICES = (
+        ('Life Insurance', 'Life Insurance'),
+        ('Group Insurance', 'Group Insurance'),
+        ('Travel Insurance', 'Travel Insurance'),
+        ('Health Insurance', 'Health Insurance'),
+        ('Dental insurance', 'Dental insurance'),
+        ('Vision insurance', 'Vision insurance'),
+        ('Accident insurance', 'Accident insurance'),
+        ('Critical illiness insurance', 'Critical illiness insurance'),
+        ('Motor Policy', 'Motor Policy'),)
+
+    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Your Name'}))
+    email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder':'Email'}))
+    phone = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Phone Number'}))
+    product = forms.ChoiceField(widget=forms.Select, choices=CHOICES)
+    message = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Message'}))
+    class Meta:
+        model = GetFreeQuote
+        fields = ['name', 'email','phone', 'product', 'message']
+
+
+
+
+
+
+
+
+
+
