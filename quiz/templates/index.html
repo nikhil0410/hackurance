@@ -3,8 +3,19 @@
 {% block content %}
 
 {% load static from staticfiles %}
+
     <div class="clear"></div>
     <div id="page-content">
+        
+  {% if messages %}
+
+    <div class="alert alert-success" style="margin-bottom: 0px;padding-left: 600px">
+    {% for message in messages %}
+    <strong>Success!</strong> {{ message }}
+    {% endfor %}
+  </div>
+    
+    {% endif %}
         <section class="flexslider">
             <ul class="slides">
                 <li>
@@ -517,17 +528,6 @@
         </section>
     </div>
     <div class="clear"></div>
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
-        {% endfor %}
-    </ul>
-
-    <script>
-      alert( 'Record save successfully' );
     
-    </script>
-    {% endif %}
     
 {% endblock  %}

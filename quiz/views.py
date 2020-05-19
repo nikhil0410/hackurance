@@ -1,6 +1,6 @@
 import random
 
-from django.contrib import messages
+# from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.exceptions import PermissionDenied
@@ -50,6 +50,7 @@ def contact_us(request):
         if form.is_valid():
             contact = form.save(commit=False)
             contact.save()
+            messages.success(request, 'Form submission successful')
                
             # redirect to accounts page:
             return render(request, 'index.html', {})
@@ -71,6 +72,7 @@ def get_free_quote(request):
         if form.is_valid():
             contact = form.save(commit=False)
             contact.save()
+            messages.success(request, 'Form submission successful')
                
             # redirect to accounts page:
             return render(request, 'index.html', {})
@@ -94,6 +96,7 @@ def enrollment(request):
             contact = form.save(commit=False)
             contact.user = request.user
             contact.save()
+            messages.success(request, 'Enrollment Form is successfully safed')
                
             # redirect to accounts page:
             return render(request, 'index.html', {})
@@ -117,6 +120,7 @@ def claim(request):
             contact = form.save(commit=False)
             contact.user = request.user
             contact.save()
+            messages.success(request, 'Claim Form submission successful')
                
             # redirect to accounts page:
             return HttpResponseRedirect('/')
@@ -181,6 +185,7 @@ def register(request):
                 user.last_name = form.cleaned_data['last_name']
                 user.phone_number = form.cleaned_data['phone_number']
                 user.save()
+                messages.success(request, 'You are Registered')
                
                 # Login the user
                 login(request, user)
@@ -198,7 +203,6 @@ def register(request):
 def logout_user(request):
     logout(request)
     messages.success(request, 'You have been logged out!')
-    print('logout function working')
     return render(request, 'index.html', {})
 
 
