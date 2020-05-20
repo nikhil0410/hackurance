@@ -15,6 +15,16 @@ class ContactForm(forms.ModelForm):
 
 
 class EnrollmentForm(forms.ModelForm):
+    CHOICES = (
+        ('Life Insurance', 'Life Insurance'),
+        ('Group Insurance', 'Group Insurance'),
+        ('Travel Insurance', 'Travel Insurance'),
+        ('Health Insurance', 'Health Insurance'),
+        ('Dental insurance', 'Dental insurance'),
+        ('Vision insurance', 'Vision insurance'),
+        ('Accident insurance', 'Accident insurance'),
+        ('Critical illiness insurance', 'Critical illiness insurance'),
+        ('Motor Policy', 'Motor Policy'),)
 
     employer_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Employer Name'}))
     group_plan_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Group Plan Number'}))
@@ -26,13 +36,14 @@ class EnrollmentForm(forms.ModelForm):
     address = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Address'}))
     work_status = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Work Status'}))
     annual_income = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Annual Income'}))
+    product = forms.ChoiceField(widget=forms.Select, choices=CHOICES)
     profession = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Job Title'}))
     dependent_details = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Dependent Details'}))
 
     class Meta:
         model = EnrollmentModel
         fields = ['employer_name', 'group_plan_number', 'ssn', 'age', 'gender', 'date_of_birth', 'address', 'work_status',
-        'annual_income', 'profession', 'dependent_details']
+        'annual_income', 'profession', 'dependent_details', 'product']
 
 class ClaimForm(forms.ModelForm):
 

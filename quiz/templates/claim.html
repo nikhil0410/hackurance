@@ -7,10 +7,10 @@
     <div id="page-content">
         <section class="breadcrumb">
             <div class="container">
-                <h2>Enrollemnt Form</h2>
+                <h2>Claim Form</h2>
                 <ul>
                     <li><a href="index.html">Home</a> ></li>
-                    <li><a href="#">Enrollment Form</a></li>
+                    <li><a href="#">Claim Form</a></li>
                 </ul>
             </div>
         </section>
@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <div class="form-box">
-                            <h2>Enroll yourself to get more information about plans</h2>
+                            <h2>Submit Claim</h2>
                             <div class="form-content">
                               <form method="POST" action="">
                                 {% csrf_token %}
@@ -27,6 +27,7 @@
                                   {{ form.group_id }}
                                   {{ form.ssn }}
                                   {{ form.claim_number }}
+                                  <input type="file" id="myfile" name="myfile" placeholder="File Upload">
                                   <div class="text-center">
                                       <input type="submit" class="btn-default" value="Submit" />
                                   </div>

@@ -96,6 +96,17 @@ class ContactModel(models.Model):
         return self.name
 
 class EnrollmentModel(models.Model):
+    CHOICES = (
+        ('Life Insurance', 'Life Insurance'),
+        ('Group Insurance', 'Group Insurance'),
+        ('Travel Insurance', 'Travel Insurance'),
+        ('Health Insurance', 'Health Insurance'),
+        ('Dental insurance', 'Dental insurance'),
+        ('Vision insurance', 'Vision insurance'),
+        ('Accident insurance', 'Accident insurance'),
+        ('Critical illiness insurance', 'Critical illiness insurance'),
+        ('Motor Policy', 'Motor Policy'),)
+
     user = models.ForeignKey(User, null=True, blank=True, on_delete=None)
     employer_name = models.CharField(max_length=100, null=True)
     group_plan_number = models.CharField(max_length=10, null=True)
@@ -108,9 +119,12 @@ class EnrollmentModel(models.Model):
     annual_income = models.IntegerField(null=True)
     profession = models.CharField(max_length=100, null=True)
     dependent_details = models.CharField(max_length=10, null=True)
+    product = models.CharField(max_length=100, choices = CHOICES, null=True)
+    expected_product = models.CharField(max_length=100, choices = CHOICES, null=True)
+    prob_of_buying = models.IntegerField(null=True)
           
     def __str__(self):
-        return self.profession 
+        return self.profession, self.employer_name 
 
 class ClaimModel(models.Model):
     user = models.ForeignKey(User, null=True, blank=True, on_delete=None)
